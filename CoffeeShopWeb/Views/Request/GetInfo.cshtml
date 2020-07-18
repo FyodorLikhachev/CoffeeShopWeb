@@ -1,0 +1,8 @@
+﻿@using CoffeeShopWeb.Models
+@{
+    ViewBag.Title = "Выгрузка данных";
+}
+
+<h2>Выгрузка данных</h2>
+
+@DataHelper.TableHelper(ViewBag.Data as System.Data.DataTable)

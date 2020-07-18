@@ -1,0 +1,49 @@
+﻿@using CoffeeShopWeb.Models
+
+@{
+    ViewBag.Title = "Отчёты";
+}
+
+<h2>Отчёты</h2>
+<br />
+<ul class="nav nav-tabs" id="publishment-types" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="flat-tab" data-toggle="tab" href="#flat" role="tab" aria-controls="flat" aria-selected="true">Продаваемые продукты</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="room-tab" data-toggle="tab" href="#room" role="tab" aria-controls="characteristics" aria-selected="false">Прибыль</a>
+    </li>
+</ul>
+<div class="tab-content" id="product-content">
+    <div class="tab-pane fade show active" id="flat" role="tabpanel" aria-labelledby="flat-tab"></div>
+    <div class="tab-pane fade" id="room" role="tabpanel" aria-labelledby="characteristics-tab"></div>
+</div>
+<br />
+<div id="report1">
+    @DataHelper.TableHelper(ViewBag.Report1 as System.Data.DataTable)
+</div>
+
+<div id="report2" hidden="hidden">
+    @DataHelper.TableHelper(ViewBag.Report2 as System.Data.DataTable)
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#flat-tab').click(function (e) {
+                e.preventDefault();
+                $('#report2').attr("hidden", "hidden");
+                $('#report1').removeAttr("hidden");
+            });
+        });
+
+         $(document).ready(function () {
+            $('#room-tab').click(function (e) {
+                e.preventDefault();
+                $('#report1').attr("hidden", "hidden");
+                $('#report2').removeAttr("hidden");
+            });
+         });
+    </script>
+}

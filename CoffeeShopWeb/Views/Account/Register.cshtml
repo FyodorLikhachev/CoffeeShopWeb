@@ -1,0 +1,69 @@
+﻿@model CoffeeShopWeb.Models.RegisterViewModel
+@using CoffeeShopWeb.Models;
+@{
+    ViewBag.Title = "Регистрация";
+}
+
+<br />
+<div>
+    <section>
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+        {
+            @Html.ValidationSummary()
+            <div>
+                <div>
+                    <label asp-for="Position">Должность</label><br />
+                    @Html.EnumDropDownListFor(x => x.Position, new { @class = "form-control" })
+                </div>
+                <br />
+                <div>
+                    <label asp-for="SalesPoint">Адрес кофейни</label><br />
+                    @Html.DropDownList("SalesPoint", new SelectList(ViewBag.Adresses, "Text", "Value"), new { @class = "form-control"})
+                </div>
+                <br />
+                <div>
+                    <label>Имя</label><br />
+                    <input type="text" name="Name" class="form-control" />
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+                <br />
+                <div>
+                    <label>Фамилия</label><br />
+                    <input type="text" name="SecondName" class="form-control" />
+                    @Html.ValidationMessageFor(m => m.SecondName)
+                </div>
+                <br />
+                <div>
+                    <label>Отчество</label><br />
+                    <input type="text" name="MiddleName" class="form-control" />
+                    @Html.ValidationMessageFor(m => m.MiddleName)
+                </div>
+                <br />
+                <div>
+                    <label>Логин</label><br />
+                    <input type="text" name="Login" class="form-control" />
+                    @Html.ValidationMessageFor(m => m.Login)
+                </div>
+                <br />
+                <div>
+                    <label asp-for="Password">Пароль</label><br />
+                    <input type="password" name="Password" class="form-control" />
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <br />
+                <div>
+                    <label asp-for="ConfirmPassword">Подтвердите пароль</label><br />
+                    <input type="password" name="ConfirmPassword" class="form-control" />
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                </div>
+                <br />
+                <div>
+                    <input type="submit" value="Sign up" class="btn btn-outline-dark" />
+                </div>
+            </div>
+        }
+    </section>
+</div>
+
+
+

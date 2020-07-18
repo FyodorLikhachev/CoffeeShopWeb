@@ -1,0 +1,1079 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CoffeeShopDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accounts">
+          <Key>
+            <PropertyRef Name="account_id" />
+          </Key>
+          <Property Name="account_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employee_id" Type="int" Nullable="false" />
+          <Property Name="login_value" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password_value" Type="char" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="customer_types">
+          <Key>
+            <PropertyRef Name="customer_type_id" />
+          </Key>
+          <Property Name="customer_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customer_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="discount" Type="int" Nullable="false" />
+          <Property Name="active_from" Type="datetime" Nullable="false" />
+          <Property Name="active_to" Type="datetime" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sales_point_id" Type="int" Nullable="false" />
+          <Property Name="position" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="second_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="middle_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="active_from" Type="datetime" Nullable="false" />
+          <Property Name="active_to" Type="datetime" />
+        </EntityType>
+        <EntityType Name="goods">
+          <Key>
+            <PropertyRef Name="good_id" />
+          </Key>
+          <Property Name="good_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="good_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="price" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="photo" Type="varbinary(max)" />
+          <Property Name="active_from" Type="datetime" Nullable="false" />
+          <Property Name="active_to" Type="datetime" />
+        </EntityType>
+        <EntityType Name="material_good_links">
+          <Key>
+            <PropertyRef Name="link_id" />
+          </Key>
+          <Property Name="link_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="good_id" Type="int" Nullable="false" />
+          <Property Name="material_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="materials">
+          <Key>
+            <PropertyRef Name="material_id" />
+          </Key>
+          <Property Name="material_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="unit_id" Type="int" Nullable="false" />
+          <Property Name="material_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="order_positions">
+          <Key>
+            <PropertyRef Name="order_position_id" />
+          </Key>
+          <Property Name="order_position_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="employee_id" Type="int" Nullable="false" />
+          <Property Name="good_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_antipod_id" Type="int" />
+          <Property Name="customer_type_id" Type="int" Nullable="false" />
+          <Property Name="order_date" Type="datetime" Nullable="false" />
+          <Property Name="order_sum" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="is_card_payment" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="providers">
+          <Key>
+            <PropertyRef Name="provider_id" />
+          </Key>
+          <Property Name="provider_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="provider_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="shipment_in" Type="int" Nullable="false" />
+          <Property Name="active_from" Type="datetime" Nullable="false" />
+          <Property Name="active_to" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sales_points">
+          <Key>
+            <PropertyRef Name="sales_point_id" />
+          </Key>
+          <Property Name="sales_point_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="active_from" Type="datetime" Nullable="false" />
+          <Property Name="active_to" Type="datetime" />
+        </EntityType>
+        <EntityType Name="transaction_types">
+          <Key>
+            <PropertyRef Name="transaction_type_id" />
+          </Key>
+          <Property Name="transaction_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="transaction_type_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transactions">
+          <Key>
+            <PropertyRef Name="transaction_id" />
+          </Key>
+          <Property Name="transaction_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tran_order_id" Type="int" Nullable="false" />
+          <Property Name="transaction_type_id" Type="int" Nullable="false" />
+          <Property Name="employee_id" Type="int" Nullable="false" />
+          <Property Name="material_id" Type="int" Nullable="false" />
+          <Property Name="provider_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="transaction_sum" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="transaction_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="units">
+          <Key>
+            <PropertyRef Name="unit_id" />
+          </Key>
+          <Property Name="unit_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="unit_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__accounts__employ__5CD6CB2B">
+          <End Role="employees" Type="Self.employees" Multiplicity="1" />
+          <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="employee_id" />
+            </Principal>
+            <Dependent Role="accounts">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__sales__2B3F6F97">
+          <End Role="sales_points" Type="Self.sales_points" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sales_points">
+              <PropertyRef Name="sales_point_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="sales_point_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__material___good___3B75D760">
+          <End Role="goods" Type="Self.goods" Multiplicity="1" />
+          <End Role="material_good_links" Type="Self.material_good_links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="good_id" />
+            </Principal>
+            <Dependent Role="material_good_links">
+              <PropertyRef Name="good_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__material___mater__3C69FB99">
+          <End Role="materials" Type="Self.materials" Multiplicity="1" />
+          <End Role="material_good_links" Type="Self.material_good_links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materials">
+              <PropertyRef Name="material_id" />
+            </Principal>
+            <Dependent Role="material_good_links">
+              <PropertyRef Name="material_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__materials__unit___38996AB5">
+          <End Role="units" Type="Self.units" Multiplicity="1" />
+          <End Role="materials" Type="Self.materials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="units">
+              <PropertyRef Name="unit_id" />
+            </Principal>
+            <Dependent Role="materials">
+              <PropertyRef Name="unit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_pos__emplo__30F848ED">
+          <End Role="employees" Type="Self.employees" Multiplicity="1" />
+          <End Role="order_positions" Type="Self.order_positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="employee_id" />
+            </Principal>
+            <Dependent Role="order_positions">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_pos__good___31EC6D26">
+          <End Role="goods" Type="Self.goods" Multiplicity="1" />
+          <End Role="order_positions" Type="Self.order_positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="good_id" />
+            </Principal>
+            <Dependent Role="order_positions">
+              <PropertyRef Name="good_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacti__emplo__6383C8BA">
+          <End Role="employees" Type="Self.employees" Multiplicity="1" />
+          <End Role="transactions" Type="Self.transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="employee_id" />
+            </Principal>
+            <Dependent Role="transactions">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacti__mater__628FA481">
+          <End Role="materials" Type="Self.materials" Multiplicity="1" />
+          <End Role="transactions" Type="Self.transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materials">
+              <PropertyRef Name="material_id" />
+            </Principal>
+            <Dependent Role="transactions">
+              <PropertyRef Name="material_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacti__provi__619B8048">
+          <End Role="providers" Type="Self.providers" Multiplicity="1" />
+          <End Role="transactions" Type="Self.transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="providers">
+              <PropertyRef Name="provider_id" />
+            </Principal>
+            <Dependent Role="transactions">
+              <PropertyRef Name="provider_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacti__trans__60A75C0F">
+          <End Role="transaction_types" Type="Self.transaction_types" Multiplicity="1" />
+          <End Role="transactions" Type="Self.transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="transaction_types">
+              <PropertyRef Name="transaction_type_id" />
+            </Principal>
+            <Dependent Role="transactions">
+              <PropertyRef Name="transaction_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_positions_order_id">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="order_positions" Type="Self.order_positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="order_positions">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_customer_type_id">
+          <End Role="customer_types" Type="Self.customer_types" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer_types">
+              <PropertyRef Name="customer_type_id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="customer_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_order_antipod_id">
+          <End Role="orders" Type="Self.orders" Multiplicity="0..1" />
+          <End Role="orders1" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="orders1">
+              <PropertyRef Name="order_antipod_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="change_inventory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employee_id" Type="int" Mode="In" />
+          <Parameter Name="withdraw_type_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="create_client_order" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employee_id" Type="int" Mode="In" />
+          <Parameter Name="num" Type="int" Mode="In" />
+          <Parameter Name="customer_type_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="is_card_payment" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="create_order" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employee_id" Type="int" Mode="In" />
+          <Parameter Name="num" Type="int" Mode="In" />
+          <Parameter Name="provider_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="transaction_type_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="get_current_day_client_orders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employee_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="get_current_inventory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employee_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="get_employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="login" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="get_maxdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime" />
+        <Function Name="get_provider_orders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employee_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="get_sales_point_workers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employee_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="is_client_order_exists" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="client_order_id" Type="int" Mode="In" />
+          <Parameter Name="is_exists" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="is_tran_order_exists" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tran_order_id" Type="int" Mode="In" />
+          <Parameter Name="is_exists" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="report_get_revenue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employee_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="report_get_sold_goods" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employee_id" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="CoffeeShopDBModelStoreContainer">
+          <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer_types" EntityType="Self.customer_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="goods" EntityType="Self.goods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="material_good_links" EntityType="Self.material_good_links" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="materials" EntityType="Self.materials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_positions" EntityType="Self.order_positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="providers" EntityType="Self.providers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sales_points" EntityType="Self.sales_points" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="transaction_types" EntityType="Self.transaction_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="transactions" EntityType="Self.transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="units" EntityType="Self.units" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__accounts__employ__5CD6CB2B" Association="Self.FK__accounts__employ__5CD6CB2B">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__sales__2B3F6F97" Association="Self.FK__employees__sales__2B3F6F97">
+            <End Role="sales_points" EntitySet="sales_points" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__material___good___3B75D760" Association="Self.FK__material___good___3B75D760">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="material_good_links" EntitySet="material_good_links" />
+          </AssociationSet>
+          <AssociationSet Name="FK__material___mater__3C69FB99" Association="Self.FK__material___mater__3C69FB99">
+            <End Role="materials" EntitySet="materials" />
+            <End Role="material_good_links" EntitySet="material_good_links" />
+          </AssociationSet>
+          <AssociationSet Name="FK__materials__unit___38996AB5" Association="Self.FK__materials__unit___38996AB5">
+            <End Role="units" EntitySet="units" />
+            <End Role="materials" EntitySet="materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_pos__emplo__30F848ED" Association="Self.FK__order_pos__emplo__30F848ED">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="order_positions" EntitySet="order_positions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_pos__good___31EC6D26" Association="Self.FK__order_pos__good___31EC6D26">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="order_positions" EntitySet="order_positions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacti__emplo__6383C8BA" Association="Self.FK__transacti__emplo__6383C8BA">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="transactions" EntitySet="transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacti__mater__628FA481" Association="Self.FK__transacti__mater__628FA481">
+            <End Role="materials" EntitySet="materials" />
+            <End Role="transactions" EntitySet="transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacti__provi__619B8048" Association="Self.FK__transacti__provi__619B8048">
+            <End Role="providers" EntitySet="providers" />
+            <End Role="transactions" EntitySet="transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacti__trans__60A75C0F" Association="Self.FK__transacti__trans__60A75C0F">
+            <End Role="transaction_types" EntitySet="transaction_types" />
+            <End Role="transactions" EntitySet="transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_positions_order_id" Association="Self.FK_order_positions_order_id">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_positions" EntitySet="order_positions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_customer_type_id" Association="Self.FK_orders_customer_type_id">
+            <End Role="customer_types" EntitySet="customer_types" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_order_antipod_id" Association="Self.FK_orders_order_antipod_id">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="orders1" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CoffeeShopDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="account_id" />
+          </Key>
+          <Property Name="account_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employee_id" Type="Int32" Nullable="false" />
+          <Property Name="login_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password_value" Type="String" MaxLength="32" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="Self.FK__accounts__employ__5CD6CB2B" FromRole="accounts" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="customer_types">
+          <Key>
+            <PropertyRef Name="customer_type_id" />
+          </Key>
+          <Property Name="customer_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="discount" Type="Int32" Nullable="false" />
+          <Property Name="active_from" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active_to" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_customer_type_id" FromRole="customer_types" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sales_point_id" Type="Int32" Nullable="false" />
+          <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="second_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="active_from" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active_to" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="accounts" Relationship="Self.FK__accounts__employ__5CD6CB2B" FromRole="employees" ToRole="accounts" />
+          <NavigationProperty Name="sales_points" Relationship="Self.FK__employees__sales__2B3F6F97" FromRole="employees" ToRole="sales_points" />
+          <NavigationProperty Name="order_positions" Relationship="Self.FK__order_pos__emplo__30F848ED" FromRole="employees" ToRole="order_positions" />
+          <NavigationProperty Name="transactions" Relationship="Self.FK__transacti__emplo__6383C8BA" FromRole="employees" ToRole="transactions" />
+        </EntityType>
+        <EntityType Name="good">
+          <Key>
+            <PropertyRef Name="good_id" />
+          </Key>
+          <Property Name="good_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="good_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="active_from" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active_to" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="material_good_links" Relationship="Self.FK__material___good___3B75D760" FromRole="goods" ToRole="material_good_links" />
+          <NavigationProperty Name="order_positions" Relationship="Self.FK__order_pos__good___31EC6D26" FromRole="goods" ToRole="order_positions" />
+        </EntityType>
+        <EntityType Name="material_good_links">
+          <Key>
+            <PropertyRef Name="link_id" />
+          </Key>
+          <Property Name="link_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="good_id" Type="Int32" Nullable="false" />
+          <Property Name="material_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <NavigationProperty Name="good" Relationship="Self.FK__material___good___3B75D760" FromRole="material_good_links" ToRole="goods" />
+          <NavigationProperty Name="material" Relationship="Self.FK__material___mater__3C69FB99" FromRole="material_good_links" ToRole="materials" />
+        </EntityType>
+        <EntityType Name="material">
+          <Key>
+            <PropertyRef Name="material_id" />
+          </Key>
+          <Property Name="material_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="unit_id" Type="Int32" Nullable="false" />
+          <Property Name="material_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="material_good_links" Relationship="Self.FK__material___mater__3C69FB99" FromRole="materials" ToRole="material_good_links" />
+          <NavigationProperty Name="unit" Relationship="Self.FK__materials__unit___38996AB5" FromRole="materials" ToRole="units" />
+          <NavigationProperty Name="transactions" Relationship="Self.FK__transacti__mater__628FA481" FromRole="materials" ToRole="transactions" />
+        </EntityType>
+        <EntityType Name="order_positions">
+          <Key>
+            <PropertyRef Name="order_position_id" />
+          </Key>
+          <Property Name="order_position_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="employee_id" Type="Int32" Nullable="false" />
+          <Property Name="good_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="Self.FK__order_pos__emplo__30F848ED" FromRole="order_positions" ToRole="employees" />
+          <NavigationProperty Name="good" Relationship="Self.FK__order_pos__good___31EC6D26" FromRole="order_positions" ToRole="goods" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_positions_order_id" FromRole="order_positions" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_antipod_id" Type="Int32" />
+          <Property Name="customer_type_id" Type="Int32" Nullable="false" />
+          <Property Name="order_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="order_sum" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="is_card_payment" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="customer_types" Relationship="Self.FK_orders_customer_type_id" FromRole="orders" ToRole="customer_types" />
+          <NavigationProperty Name="order_positions" Relationship="Self.FK_order_positions_order_id" FromRole="orders" ToRole="order_positions" />
+          <NavigationProperty Name="orders1" Relationship="Self.FK_orders_order_antipod_id" FromRole="orders" ToRole="orders1" />
+          <NavigationProperty Name="order1" Relationship="Self.FK_orders_order_antipod_id" FromRole="orders1" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="provider">
+          <Key>
+            <PropertyRef Name="provider_id" />
+          </Key>
+          <Property Name="provider_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="provider_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="shipment_in" Type="Int32" Nullable="false" />
+          <Property Name="active_from" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active_to" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="transactions" Relationship="Self.FK__transacti__provi__619B8048" FromRole="providers" ToRole="transactions" />
+        </EntityType>
+        <EntityType Name="sales_points">
+          <Key>
+            <PropertyRef Name="sales_point_id" />
+          </Key>
+          <Property Name="sales_point_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="active_from" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active_to" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__employees__sales__2B3F6F97" FromRole="sales_points" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="transaction_types">
+          <Key>
+            <PropertyRef Name="transaction_type_id" />
+          </Key>
+          <Property Name="transaction_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="transaction_type_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="transactions" Relationship="Self.FK__transacti__trans__60A75C0F" FromRole="transaction_types" ToRole="transactions" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="transaction_id" />
+          </Key>
+          <Property Name="transaction_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tran_order_id" Type="Int32" Nullable="false" />
+          <Property Name="transaction_type_id" Type="Int32" Nullable="false" />
+          <Property Name="employee_id" Type="Int32" Nullable="false" />
+          <Property Name="material_id" Type="Int32" Nullable="false" />
+          <Property Name="provider_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="transaction_sum" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="transaction_date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="employee" Relationship="Self.FK__transacti__emplo__6383C8BA" FromRole="transactions" ToRole="employees" />
+          <NavigationProperty Name="material" Relationship="Self.FK__transacti__mater__628FA481" FromRole="transactions" ToRole="materials" />
+          <NavigationProperty Name="provider" Relationship="Self.FK__transacti__provi__619B8048" FromRole="transactions" ToRole="providers" />
+          <NavigationProperty Name="transaction_types" Relationship="Self.FK__transacti__trans__60A75C0F" FromRole="transactions" ToRole="transaction_types" />
+        </EntityType>
+        <EntityType Name="unit">
+          <Key>
+            <PropertyRef Name="unit_id" />
+          </Key>
+          <Property Name="unit_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="unit_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="materials" Relationship="Self.FK__materials__unit___38996AB5" FromRole="units" ToRole="materials" />
+        </EntityType>
+        <Association Name="FK__accounts__employ__5CD6CB2B">
+          <End Role="employees" Type="Self.employee" Multiplicity="1" />
+          <End Role="accounts" Type="Self.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="employee_id" />
+            </Principal>
+            <Dependent Role="accounts">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_customer_type_id">
+          <End Role="customer_types" Type="Self.customer_types" Multiplicity="1" />
+          <End Role="orders" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer_types">
+              <PropertyRef Name="customer_type_id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="customer_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__sales__2B3F6F97">
+          <End Role="sales_points" Type="Self.sales_points" Multiplicity="1" />
+          <End Role="employees" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sales_points">
+              <PropertyRef Name="sales_point_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="sales_point_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_pos__emplo__30F848ED">
+          <End Role="employees" Type="Self.employee" Multiplicity="1" />
+          <End Role="order_positions" Type="Self.order_positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="employee_id" />
+            </Principal>
+            <Dependent Role="order_positions">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacti__emplo__6383C8BA">
+          <End Role="employees" Type="Self.employee" Multiplicity="1" />
+          <End Role="transactions" Type="Self.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="employee_id" />
+            </Principal>
+            <Dependent Role="transactions">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__material___good___3B75D760">
+          <End Role="goods" Type="Self.good" Multiplicity="1" />
+          <End Role="material_good_links" Type="Self.material_good_links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="good_id" />
+            </Principal>
+            <Dependent Role="material_good_links">
+              <PropertyRef Name="good_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_pos__good___31EC6D26">
+          <End Role="goods" Type="Self.good" Multiplicity="1" />
+          <End Role="order_positions" Type="Self.order_positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="good_id" />
+            </Principal>
+            <Dependent Role="order_positions">
+              <PropertyRef Name="good_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__material___mater__3C69FB99">
+          <End Role="materials" Type="Self.material" Multiplicity="1" />
+          <End Role="material_good_links" Type="Self.material_good_links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materials">
+              <PropertyRef Name="material_id" />
+            </Principal>
+            <Dependent Role="material_good_links">
+              <PropertyRef Name="material_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__materials__unit___38996AB5">
+          <End Role="units" Type="Self.unit" Multiplicity="1" />
+          <End Role="materials" Type="Self.material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="units">
+              <PropertyRef Name="unit_id" />
+            </Principal>
+            <Dependent Role="materials">
+              <PropertyRef Name="unit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacti__mater__628FA481">
+          <End Role="materials" Type="Self.material" Multiplicity="1" />
+          <End Role="transactions" Type="Self.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materials">
+              <PropertyRef Name="material_id" />
+            </Principal>
+            <Dependent Role="transactions">
+              <PropertyRef Name="material_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_positions_order_id">
+          <End Role="orders" Type="Self.order" Multiplicity="1" />
+          <End Role="order_positions" Type="Self.order_positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="order_positions">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_order_antipod_id">
+          <End Role="orders" Type="Self.order" Multiplicity="0..1" />
+          <End Role="orders1" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="orders1">
+              <PropertyRef Name="order_antipod_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacti__provi__619B8048">
+          <End Role="providers" Type="Self.provider" Multiplicity="1" />
+          <End Role="transactions" Type="Self.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="providers">
+              <PropertyRef Name="provider_id" />
+            </Principal>
+            <Dependent Role="transactions">
+              <PropertyRef Name="provider_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacti__trans__60A75C0F">
+          <End Role="transaction_types" Type="Self.transaction_types" Multiplicity="1" />
+          <End Role="transactions" Type="Self.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="transaction_types">
+              <PropertyRef Name="transaction_type_id" />
+            </Principal>
+            <Dependent Role="transactions">
+              <PropertyRef Name="transaction_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CoffeeShopDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accounts" EntityType="Self.account" />
+          <EntitySet Name="customer_types" EntityType="Self.customer_types" />
+          <EntitySet Name="employees" EntityType="Self.employee" />
+          <EntitySet Name="goods" EntityType="Self.good" />
+          <EntitySet Name="material_good_links" EntityType="Self.material_good_links" />
+          <EntitySet Name="materials" EntityType="Self.material" />
+          <EntitySet Name="order_positions" EntityType="Self.order_positions" />
+          <EntitySet Name="orders" EntityType="Self.order" />
+          <EntitySet Name="providers" EntityType="Self.provider" />
+          <EntitySet Name="sales_points" EntityType="Self.sales_points" />
+          <EntitySet Name="transaction_types" EntityType="Self.transaction_types" />
+          <EntitySet Name="transactions" EntityType="Self.transaction" />
+          <EntitySet Name="units" EntityType="Self.unit" />
+          <AssociationSet Name="FK__accounts__employ__5CD6CB2B" Association="Self.FK__accounts__employ__5CD6CB2B">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_customer_type_id" Association="Self.FK_orders_customer_type_id">
+            <End Role="customer_types" EntitySet="customer_types" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__sales__2B3F6F97" Association="Self.FK__employees__sales__2B3F6F97">
+            <End Role="sales_points" EntitySet="sales_points" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_pos__emplo__30F848ED" Association="Self.FK__order_pos__emplo__30F848ED">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="order_positions" EntitySet="order_positions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacti__emplo__6383C8BA" Association="Self.FK__transacti__emplo__6383C8BA">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="transactions" EntitySet="transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__material___good___3B75D760" Association="Self.FK__material___good___3B75D760">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="material_good_links" EntitySet="material_good_links" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_pos__good___31EC6D26" Association="Self.FK__order_pos__good___31EC6D26">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="order_positions" EntitySet="order_positions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__material___mater__3C69FB99" Association="Self.FK__material___mater__3C69FB99">
+            <End Role="materials" EntitySet="materials" />
+            <End Role="material_good_links" EntitySet="material_good_links" />
+          </AssociationSet>
+          <AssociationSet Name="FK__materials__unit___38996AB5" Association="Self.FK__materials__unit___38996AB5">
+            <End Role="units" EntitySet="units" />
+            <End Role="materials" EntitySet="materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacti__mater__628FA481" Association="Self.FK__transacti__mater__628FA481">
+            <End Role="materials" EntitySet="materials" />
+            <End Role="transactions" EntitySet="transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_positions_order_id" Association="Self.FK_order_positions_order_id">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_positions" EntitySet="order_positions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_order_antipod_id" Association="Self.FK_orders_order_antipod_id">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="orders1" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacti__provi__619B8048" Association="Self.FK__transacti__provi__619B8048">
+            <End Role="providers" EntitySet="providers" />
+            <End Role="transactions" EntitySet="transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacti__trans__60A75C0F" Association="Self.FK__transacti__trans__60A75C0F">
+            <End Role="transaction_types" EntitySet="transaction_types" />
+            <End Role="transactions" EntitySet="transactions" />
+          </AssociationSet>
+          <FunctionImport Name="change_inventory">
+            <Parameter Name="employee_id" Mode="In" Type="Int32" />
+            <Parameter Name="withdraw_type_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="create_client_order">
+            <Parameter Name="employee_id" Mode="In" Type="Int32" />
+            <Parameter Name="num" Mode="In" Type="Int32" />
+            <Parameter Name="customer_type_name" Mode="In" Type="String" />
+            <Parameter Name="is_card_payment" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="create_order">
+            <Parameter Name="employee_id" Mode="In" Type="Int32" />
+            <Parameter Name="num" Mode="In" Type="Int32" />
+            <Parameter Name="provider_name" Mode="In" Type="String" />
+            <Parameter Name="transaction_type_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="get_current_day_client_orders">
+            <Parameter Name="employee_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="get_current_inventory">
+            <Parameter Name="employee_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="get_employee" ReturnType="Collection(CoffeeShopDBModel.get_employee_Result)">
+            <Parameter Name="login" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="get_provider_orders">
+            <Parameter Name="employee_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="get_sales_point_workers" ReturnType="Collection(Int32)">
+            <Parameter Name="employee_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="is_client_order_exists">
+            <Parameter Name="client_order_id" Mode="In" Type="Int32" />
+            <Parameter Name="is_exists" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="is_tran_order_exists">
+            <Parameter Name="tran_order_id" Mode="In" Type="Int32" />
+            <Parameter Name="is_exists" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="report_get_revenue">
+            <Parameter Name="employee_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="report_get_sold_goods">
+            <Parameter Name="employee_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="get_employee_Result">
+          <Property Type="Int32" Name="employee_id" Nullable="false" />
+          <Property Type="Int32" Name="sales_point_id" Nullable="false" />
+          <Property Type="String" Name="position" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="first_name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="second_name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="middle_name" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="active_from" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="active_to" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CoffeeShopDBModelStoreContainer" CdmEntityContainer="CoffeeShopDBEntities">
+          <EntitySetMapping Name="accounts">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.account">
+              <MappingFragment StoreEntitySet="accounts">
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="login_value" ColumnName="login_value" />
+                <ScalarProperty Name="password_value" ColumnName="password_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer_types">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.customer_types">
+              <MappingFragment StoreEntitySet="customer_types">
+                <ScalarProperty Name="customer_type_id" ColumnName="customer_type_id" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="active_from" ColumnName="active_from" />
+                <ScalarProperty Name="active_to" ColumnName="active_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.employee">
+              <MappingFragment StoreEntitySet="employees">
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="sales_point_id" ColumnName="sales_point_id" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="second_name" ColumnName="second_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="active_from" ColumnName="active_from" />
+                <ScalarProperty Name="active_to" ColumnName="active_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="goods">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.good">
+              <MappingFragment StoreEntitySet="goods">
+                <ScalarProperty Name="good_id" ColumnName="good_id" />
+                <ScalarProperty Name="good_name" ColumnName="good_name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="active_from" ColumnName="active_from" />
+                <ScalarProperty Name="active_to" ColumnName="active_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="material_good_links">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.material_good_links">
+              <MappingFragment StoreEntitySet="material_good_links">
+                <ScalarProperty Name="link_id" ColumnName="link_id" />
+                <ScalarProperty Name="good_id" ColumnName="good_id" />
+                <ScalarProperty Name="material_id" ColumnName="material_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materials">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.material">
+              <MappingFragment StoreEntitySet="materials">
+                <ScalarProperty Name="material_id" ColumnName="material_id" />
+                <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+                <ScalarProperty Name="material_name" ColumnName="material_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_positions">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.order_positions">
+              <MappingFragment StoreEntitySet="order_positions">
+                <ScalarProperty Name="order_position_id" ColumnName="order_position_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="good_id" ColumnName="good_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="order_antipod_id" ColumnName="order_antipod_id" />
+                <ScalarProperty Name="customer_type_id" ColumnName="customer_type_id" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="order_sum" ColumnName="order_sum" />
+                <ScalarProperty Name="is_card_payment" ColumnName="is_card_payment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="providers">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.provider">
+              <MappingFragment StoreEntitySet="providers">
+                <ScalarProperty Name="provider_id" ColumnName="provider_id" />
+                <ScalarProperty Name="provider_name" ColumnName="provider_name" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="shipment_in" ColumnName="shipment_in" />
+                <ScalarProperty Name="active_from" ColumnName="active_from" />
+                <ScalarProperty Name="active_to" ColumnName="active_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sales_points">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.sales_points">
+              <MappingFragment StoreEntitySet="sales_points">
+                <ScalarProperty Name="sales_point_id" ColumnName="sales_point_id" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="active_from" ColumnName="active_from" />
+                <ScalarProperty Name="active_to" ColumnName="active_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transaction_types">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.transaction_types">
+              <MappingFragment StoreEntitySet="transaction_types">
+                <ScalarProperty Name="transaction_type_id" ColumnName="transaction_type_id" />
+                <ScalarProperty Name="transaction_type_name" ColumnName="transaction_type_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transactions">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.transaction">
+              <MappingFragment StoreEntitySet="transactions">
+                <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+                <ScalarProperty Name="tran_order_id" ColumnName="tran_order_id" />
+                <ScalarProperty Name="transaction_type_id" ColumnName="transaction_type_id" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="material_id" ColumnName="material_id" />
+                <ScalarProperty Name="provider_id" ColumnName="provider_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="transaction_sum" ColumnName="transaction_sum" />
+                <ScalarProperty Name="transaction_date" ColumnName="transaction_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="units">
+            <EntityTypeMapping TypeName="CoffeeShopDBModel.unit">
+              <MappingFragment StoreEntitySet="units">
+                <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+                <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="change_inventory" FunctionName="CoffeeShopDBModel.Store.change_inventory" />
+          <FunctionImportMapping FunctionImportName="create_client_order" FunctionName="CoffeeShopDBModel.Store.create_client_order" />
+          <FunctionImportMapping FunctionImportName="create_order" FunctionName="CoffeeShopDBModel.Store.create_order" />
+          <FunctionImportMapping FunctionImportName="get_current_day_client_orders" FunctionName="CoffeeShopDBModel.Store.get_current_day_client_orders" />
+          <FunctionImportMapping FunctionImportName="get_current_inventory" FunctionName="CoffeeShopDBModel.Store.get_current_inventory" />
+          <FunctionImportMapping FunctionImportName="get_employee" FunctionName="CoffeeShopDBModel.Store.get_employee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopDBModel.get_employee_Result">
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="sales_point_id" ColumnName="sales_point_id" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="second_name" ColumnName="second_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="active_from" ColumnName="active_from" />
+                <ScalarProperty Name="active_to" ColumnName="active_to" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="get_provider_orders" FunctionName="CoffeeShopDBModel.Store.get_provider_orders" />
+          <FunctionImportMapping FunctionImportName="get_sales_point_workers" FunctionName="CoffeeShopDBModel.Store.get_sales_point_workers" />
+          <FunctionImportMapping FunctionImportName="is_client_order_exists" FunctionName="CoffeeShopDBModel.Store.is_client_order_exists" />
+          <FunctionImportMapping FunctionImportName="is_tran_order_exists" FunctionName="CoffeeShopDBModel.Store.is_tran_order_exists" />
+          <FunctionImportMapping FunctionImportName="report_get_revenue" FunctionName="CoffeeShopDBModel.Store.report_get_revenue" />
+          <FunctionImportMapping FunctionImportName="report_get_sold_goods" FunctionName="CoffeeShopDBModel.Store.report_get_sold_goods" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

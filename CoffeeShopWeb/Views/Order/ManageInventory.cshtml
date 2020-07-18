@@ -1,0 +1,45 @@
+﻿@model CoffeeShopWeb.Models.InventoryViewModel
+@{
+    ViewBag.Title = "Инвентаризация";
+}
+
+<h2>Инвентаризация</h2>
+
+@using (Html.BeginForm("ManageInventory", "Order", FormMethod.Post))
+{
+    @Html.ValidationSummary();
+    <table id="order-table" border="1" class="table table-bordered table-responsive-md table-striped text-center">
+        <thead>
+            <tr>
+                <th>Продукт</th>
+                <th>Количество</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                for (int i = 0; i < Model?.Goods?.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.TextBoxFor(x => x.Goods[i].ItemName, new { @readonly="true", @class = "form-control chosen-select mtr"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(x => x.Goods[i].Quantity, new { @type = "number", @class = "form-control col-md-3 qnt", @min = "1", @value = "1" })
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+    <button style="text-anchor: end" type="submit" class="btn btn-primary" id="submit">Завершить инвентаризацию</button>
+}
+
+@section Scripts
+{
+    <script>
+        $('#order-table').on('click', '.btn', function () {
+            $(this).closest('tr').remove();
+        })
+    </script>
+}

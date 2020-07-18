@@ -1,0 +1,64 @@
+﻿@using CoffeeShopWeb.Models
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CoffeShop</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .my-flex-right {
+            display:flex;
+            /*justify-content:flex-end;*/
+            margin-left:auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse my-flex-right" >
+                <ul class="nav navbar-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole(Role.Cashier)) { <li>@Html.ActionLink("Принять заказ", "ManageOrder", "Order")</li> }
+                        if (User.IsInRole(Role.Manager)) { 
+                            <li>@Html.ActionLink("Управление закупками", "ManageProviderOrder", "Order")</li>
+                            <li>@Html.ActionLink("Отчёты", "Reports", "Report")</li>
+                        }
+                        if (User.IsInRole(Role.Barista)) { <li>@Html.ActionLink("Инвентаризация", "ManageInventory", "Order")</li> }
+                        <li>@Html.ActionLink("Данные", "GetInfo", "Request")</li>
+                        <li>@Html.ActionLink("Выйти", "Logout", "Account")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Войти", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Зарегистрироваться", "Register", "Account")</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Учёт продаж кофеен</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

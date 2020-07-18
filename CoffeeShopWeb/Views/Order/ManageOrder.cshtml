@@ -1,0 +1,114 @@
+﻿@model CoffeeShopWeb.Models.OrderViewModel
+@{
+    ViewBag.Title = "Составление заказа";
+}
+
+<style>
+</style>
+
+<h2>Составление заказа</h2>
+<br />
+
+@using (Html.BeginForm("ManageOrder", "Order", FormMethod.Post))
+{
+    @Html.ValidationSummary();
+    @Html.ValidationMessageFor(m => m.OrderNumber)
+    <table>
+        <tr>
+            <td>
+                <label>Номер заказа</label><br />
+            </td>
+            <td>
+                @Html.EditorFor(x => x.OrderNumber, new { @class = "form-control" })
+            </td>
+        </tr>
+        <tr><td><br /></td></tr>
+        <tr>
+            <td>
+                <label>Тип покупателя</label><br />
+            </td>
+            <td>
+                @Html.DropDownList("CustomerType", new SelectList(ViewBag.Customers), new { @class = "form-control chosen-select" })
+            </td>
+        </tr>
+        <tr><td><br /></td></tr>
+        <tr>
+            <td>
+                <label>Оплата по карте</label><br />
+            </td>
+            <td>
+                <input type="checkbox" name="IsCardPayment" value="true"/>
+            </td>
+        </tr>
+        <tr><td><br /></td></tr>
+        <tr>
+            <td>
+                <label>Возврат покупки</label><br />
+            </td>
+            <td>
+                <input type="checkbox" name="IsRefund" id="IsRefund" value="true" />
+            </td>
+        </tr>
+        <tr><td><br /></td></tr>
+        <tr>
+            <td>
+                <button type="button" class="btn btn-success" id="btn-add-row" onclick="addRow()">
+                    Добавить позицию
+                </button>
+            </td>
+        </tr>
+        <tr><td><br /></td></tr>
+    </table>
+    <table id="order-table" border="1" class="table table-bordered table-responsive-md table-striped text-center">
+        <thead>
+            <tr>
+                <td><b>Продукт</b></td>
+                <td><b>Количество</b></td>
+                <td><b></b></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DropDownListFor(x => x.Items[0].ItemName, new SelectList(ViewBag.Items), new { @class = "form-control chosen-select" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.Items[0].Quantity, new { @type = "number", @class = "form-control col-md-3", @min = "1", @value = "1" })
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Убрать</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <button style="text-anchor: end" type="submit" class="btn btn-primary" id="submit">Оформить заказ</button>
+}
+
+@section Scripts
+{
+    <script>
+        function addRow() {
+            $('#order-table').append(
+                '<tr>' +
+                '<td>@Html.Raw(Ajax.JavaScriptStringEncode(Html.DropDownList("dropdownlist",new SelectList(ViewBag.Items), new { @class = "form-control chosen-select" }).ToHtmlString()))</td>' +
+                '<td><input type="number" min="1" value="1" class="form-control"/></td>' +
+                  '<td><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Убрать</button></td>' +
+                '</tr>');
+        }
+
+        $('#submit').click(function(){
+            var index = 0;
+
+            var items = $('#order-table tbody tr').each(function (index) {
+                $(this).find("td select").attr("name", "Items[" + index + "].ItemName");
+                $(this).find("td input").attr("name", "Items[" + index + "].Quantity");
+                index++;
+            });
+        });
+
+        $('#order-table').on('click', '.btn', function () {
+            $(this).closest('tr').remove();
+        })
+    </script>
+}

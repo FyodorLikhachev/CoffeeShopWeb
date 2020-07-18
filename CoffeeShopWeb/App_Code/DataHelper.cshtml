@@ -1,0 +1,53 @@
+﻿@helper HtmlDataTable(System.Data.DataTable dt)
+{
+    <table id="data-table" border="1" class="table table-bordered table-responsive-md table-striped text-center">
+        <thead>
+            <tr>
+                @foreach (System.Data.DataColumn col in dt.Columns)
+                {
+                    <td><b>@col</b></td>
+                }
+                <td><b>Remove</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                <tr>
+                    @for (int j = 0; j < dt.Columns.Count; j++)
+                    {
+                        <td class="pt-3-half" contenteditable="true">@dt.Rows[i][j]</td>
+                    }
+                    <td>
+                        <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">X</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@helper TableHelper(System.Data.DataTable dt)
+{
+    <table id="data-table" border="1" class="table table-bordered table-responsive-md table-striped text-center">
+        <thead>
+            <tr>
+                @foreach (System.Data.DataColumn col in dt.Columns)
+                {
+                    <td><b>@col</b></td>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                <tr>
+                    @for (int j = 0; j < dt.Columns.Count; j++)
+                    {
+                        <td class="pt-3-half" contenteditable="true">@dt.Rows[i][j]</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CoffeeShopDBModelStoreContainer" CdmEntityContainer="CoffeeShopDBEntities">
+    <EntitySetMapping Name="accounts">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.account">
+        <MappingFragment StoreEntitySet="accounts">
+          <ScalarProperty Name="account_id" ColumnName="account_id" />
+          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+          <ScalarProperty Name="login_value" ColumnName="login_value" />
+          <ScalarProperty Name="password_value" ColumnName="password_value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customer_types">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.customer_types">
+        <MappingFragment StoreEntitySet="customer_types">
+          <ScalarProperty Name="customer_type_id" ColumnName="customer_type_id" />
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="active_from" ColumnName="active_from" />
+          <ScalarProperty Name="active_to" ColumnName="active_to" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employees">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.employee">
+        <MappingFragment StoreEntitySet="employees">
+          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+          <ScalarProperty Name="sales_point_id" ColumnName="sales_point_id" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="second_name" ColumnName="second_name" />
+          <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+          <ScalarProperty Name="active_from" ColumnName="active_from" />
+          <ScalarProperty Name="active_to" ColumnName="active_to" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="goods">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.good">
+        <MappingFragment StoreEntitySet="goods">
+          <ScalarProperty Name="good_id" ColumnName="good_id" />
+          <ScalarProperty Name="good_name" ColumnName="good_name" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="active_from" ColumnName="active_from" />
+          <ScalarProperty Name="active_to" ColumnName="active_to" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="material_good_links">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.material_good_links">
+        <MappingFragment StoreEntitySet="material_good_links">
+          <ScalarProperty Name="link_id" ColumnName="link_id" />
+          <ScalarProperty Name="good_id" ColumnName="good_id" />
+          <ScalarProperty Name="material_id" ColumnName="material_id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="materials">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.material">
+        <MappingFragment StoreEntitySet="materials">
+          <ScalarProperty Name="material_id" ColumnName="material_id" />
+          <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+          <ScalarProperty Name="material_name" ColumnName="material_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="order_positions">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.order_positions">
+        <MappingFragment StoreEntitySet="order_positions">
+          <ScalarProperty Name="order_position_id" ColumnName="order_position_id" />
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+          <ScalarProperty Name="good_id" ColumnName="good_id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.order">
+        <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="order_antipod_id" ColumnName="order_antipod_id" />
+          <ScalarProperty Name="customer_type_id" ColumnName="customer_type_id" />
+          <ScalarProperty Name="order_date" ColumnName="order_date" />
+          <ScalarProperty Name="order_sum" ColumnName="order_sum" />
+          <ScalarProperty Name="is_card_payment" ColumnName="is_card_payment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="providers">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.provider">
+        <MappingFragment StoreEntitySet="providers">
+          <ScalarProperty Name="provider_id" ColumnName="provider_id" />
+          <ScalarProperty Name="provider_name" ColumnName="provider_name" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="shipment_in" ColumnName="shipment_in" />
+          <ScalarProperty Name="active_from" ColumnName="active_from" />
+          <ScalarProperty Name="active_to" ColumnName="active_to" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sales_points">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.sales_points">
+        <MappingFragment StoreEntitySet="sales_points">
+          <ScalarProperty Name="sales_point_id" ColumnName="sales_point_id" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="active_from" ColumnName="active_from" />
+          <ScalarProperty Name="active_to" ColumnName="active_to" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="transaction_types">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.transaction_types">
+        <MappingFragment StoreEntitySet="transaction_types">
+          <ScalarProperty Name="transaction_type_id" ColumnName="transaction_type_id" />
+          <ScalarProperty Name="transaction_type_name" ColumnName="transaction_type_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="transactions">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.transaction">
+        <MappingFragment StoreEntitySet="transactions">
+          <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+          <ScalarProperty Name="tran_order_id" ColumnName="tran_order_id" />
+          <ScalarProperty Name="transaction_type_id" ColumnName="transaction_type_id" />
+          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+          <ScalarProperty Name="material_id" ColumnName="material_id" />
+          <ScalarProperty Name="provider_id" ColumnName="provider_id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="transaction_sum" ColumnName="transaction_sum" />
+          <ScalarProperty Name="transaction_date" ColumnName="transaction_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="units">
+      <EntityTypeMapping TypeName="CoffeeShopDBModel.unit">
+        <MappingFragment StoreEntitySet="units">
+          <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+          <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="change_inventory" FunctionName="CoffeeShopDBModel.Store.change_inventory" />
+    <FunctionImportMapping FunctionImportName="create_client_order" FunctionName="CoffeeShopDBModel.Store.create_client_order" />
+    <FunctionImportMapping FunctionImportName="create_order" FunctionName="CoffeeShopDBModel.Store.create_order" />
+    <FunctionImportMapping FunctionImportName="get_current_day_client_orders" FunctionName="CoffeeShopDBModel.Store.get_current_day_client_orders" />
+    <FunctionImportMapping FunctionImportName="get_current_inventory" FunctionName="CoffeeShopDBModel.Store.get_current_inventory" />
+    <FunctionImportMapping FunctionImportName="get_employee" FunctionName="CoffeeShopDBModel.Store.get_employee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CoffeeShopDBModel.get_employee_Result">
+          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+          <ScalarProperty Name="sales_point_id" ColumnName="sales_point_id" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="second_name" ColumnName="second_name" />
+          <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+          <ScalarProperty Name="active_from" ColumnName="active_from" />
+          <ScalarProperty Name="active_to" ColumnName="active_to" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="get_provider_orders" FunctionName="CoffeeShopDBModel.Store.get_provider_orders" />
+    <FunctionImportMapping FunctionImportName="get_sales_point_workers" FunctionName="CoffeeShopDBModel.Store.get_sales_point_workers" />
+    <FunctionImportMapping FunctionImportName="is_client_order_exists" FunctionName="CoffeeShopDBModel.Store.is_client_order_exists" />
+    <FunctionImportMapping FunctionImportName="is_tran_order_exists" FunctionName="CoffeeShopDBModel.Store.is_tran_order_exists" />
+    <FunctionImportMapping FunctionImportName="report_get_revenue" FunctionName="CoffeeShopDBModel.Store.report_get_revenue" />
+    <FunctionImportMapping FunctionImportName="report_get_sold_goods" FunctionName="CoffeeShopDBModel.Store.report_get_sold_goods" />
+  </EntityContainerMapping>
+</Mapping>

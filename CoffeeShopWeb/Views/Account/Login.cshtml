@@ -1,0 +1,32 @@
+﻿@model CoffeeShopWeb.Models.LoginViewModel
+@{
+    ViewBag.Title = "Вход";
+}
+
+<h1>Вход</h1>
+<br />
+<div>
+    <section>
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+            <div>
+                <div class="form-group">
+                    <label>Логин</label><br />
+                    <input type="text" name="Login" class="form-control" />
+                    @Html.ValidationMessageFor(m => m.Login)
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label><br />
+                    <input type="password" name="Password" class="form-control" />
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                @Html.ValidationSummary()
+                <div class="form-group">
+                    <input type="submit" value="Войти" class="btn btn-outline-dark" />
+                </div>
+            </div>
+        }
+    </section>
+    <a href="/Account/Register">Зарегистрироваться</a>
+</div>
+

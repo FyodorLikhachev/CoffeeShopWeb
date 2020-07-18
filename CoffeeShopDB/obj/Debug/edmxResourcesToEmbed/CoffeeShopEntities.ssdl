@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CoffeeShopDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="accounts">
+    <Key>
+      <PropertyRef Name="account_id" />
+    </Key>
+    <Property Name="account_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="employee_id" Type="int" Nullable="false" />
+    <Property Name="login_value" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password_value" Type="char" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="customer_types">
+    <Key>
+      <PropertyRef Name="customer_type_id" />
+    </Key>
+    <Property Name="customer_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customer_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="discount" Type="int" Nullable="false" />
+    <Property Name="active_from" Type="datetime" Nullable="false" />
+    <Property Name="active_to" Type="datetime" />
+  </EntityType>
+  <EntityType Name="employees">
+    <Key>
+      <PropertyRef Name="employee_id" />
+    </Key>
+    <Property Name="employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sales_point_id" Type="int" Nullable="false" />
+    <Property Name="position" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="second_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="middle_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="active_from" Type="datetime" Nullable="false" />
+    <Property Name="active_to" Type="datetime" />
+  </EntityType>
+  <EntityType Name="goods">
+    <Key>
+      <PropertyRef Name="good_id" />
+    </Key>
+    <Property Name="good_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="good_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="price" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="photo" Type="varbinary(max)" />
+    <Property Name="active_from" Type="datetime" Nullable="false" />
+    <Property Name="active_to" Type="datetime" />
+  </EntityType>
+  <EntityType Name="material_good_links">
+    <Key>
+      <PropertyRef Name="link_id" />
+    </Key>
+    <Property Name="link_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="good_id" Type="int" Nullable="false" />
+    <Property Name="material_id" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="numeric" Precision="18" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="materials">
+    <Key>
+      <PropertyRef Name="material_id" />
+    </Key>
+    <Property Name="material_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="unit_id" Type="int" Nullable="false" />
+    <Property Name="material_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="order_positions">
+    <Key>
+      <PropertyRef Name="order_position_id" />
+    </Key>
+    <Property Name="order_position_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="order_id" Type="int" Nullable="false" />
+    <Property Name="employee_id" Type="int" Nullable="false" />
+    <Property Name="good_id" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="orders">
+    <Key>
+      <PropertyRef Name="order_id" />
+    </Key>
+    <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="order_antipod_id" Type="int" />
+    <Property Name="customer_type_id" Type="int" Nullable="false" />
+    <Property Name="order_date" Type="datetime" Nullable="false" />
+    <Property Name="order_sum" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="is_card_payment" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="providers">
+    <Key>
+      <PropertyRef Name="provider_id" />
+    </Key>
+    <Property Name="provider_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="provider_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="country" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="shipment_in" Type="int" Nullable="false" />
+    <Property Name="active_from" Type="datetime" Nullable="false" />
+    <Property Name="active_to" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sales_points">
+    <Key>
+      <PropertyRef Name="sales_point_id" />
+    </Key>
+    <Property Name="sales_point_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="address" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="active_from" Type="datetime" Nullable="false" />
+    <Property Name="active_to" Type="datetime" />
+  </EntityType>
+  <EntityType Name="transaction_types">
+    <Key>
+      <PropertyRef Name="transaction_type_id" />
+    </Key>
+    <Property Name="transaction_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="transaction_type_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="transactions">
+    <Key>
+      <PropertyRef Name="transaction_id" />
+    </Key>
+    <Property Name="transaction_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tran_order_id" Type="int" Nullable="false" />
+    <Property Name="transaction_type_id" Type="int" Nullable="false" />
+    <Property Name="employee_id" Type="int" Nullable="false" />
+    <Property Name="material_id" Type="int" Nullable="false" />
+    <Property Name="provider_id" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="transaction_sum" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="transaction_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="units">
+    <Key>
+      <PropertyRef Name="unit_id" />
+    </Key>
+    <Property Name="unit_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="unit_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__accounts__employ__5CD6CB2B">
+    <End Role="employees" Type="Self.employees" Multiplicity="1" />
+    <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="accounts">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__employees__sales__2B3F6F97">
+    <End Role="sales_points" Type="Self.sales_points" Multiplicity="1" />
+    <End Role="employees" Type="Self.employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sales_points">
+        <PropertyRef Name="sales_point_id" />
+      </Principal>
+      <Dependent Role="employees">
+        <PropertyRef Name="sales_point_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__material___good___3B75D760">
+    <End Role="goods" Type="Self.goods" Multiplicity="1" />
+    <End Role="material_good_links" Type="Self.material_good_links" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="goods">
+        <PropertyRef Name="good_id" />
+      </Principal>
+      <Dependent Role="material_good_links">
+        <PropertyRef Name="good_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__material___mater__3C69FB99">
+    <End Role="materials" Type="Self.materials" Multiplicity="1" />
+    <End Role="material_good_links" Type="Self.material_good_links" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="materials">
+        <PropertyRef Name="material_id" />
+      </Principal>
+      <Dependent Role="material_good_links">
+        <PropertyRef Name="material_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__materials__unit___38996AB5">
+    <End Role="units" Type="Self.units" Multiplicity="1" />
+    <End Role="materials" Type="Self.materials" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="units">
+        <PropertyRef Name="unit_id" />
+      </Principal>
+      <Dependent Role="materials">
+        <PropertyRef Name="unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__order_pos__emplo__30F848ED">
+    <End Role="employees" Type="Self.employees" Multiplicity="1" />
+    <End Role="order_positions" Type="Self.order_positions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="order_positions">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__order_pos__good___31EC6D26">
+    <End Role="goods" Type="Self.goods" Multiplicity="1" />
+    <End Role="order_positions" Type="Self.order_positions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="goods">
+        <PropertyRef Name="good_id" />
+      </Principal>
+      <Dependent Role="order_positions">
+        <PropertyRef Name="good_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__transacti__emplo__6383C8BA">
+    <End Role="employees" Type="Self.employees" Multiplicity="1" />
+    <End Role="transactions" Type="Self.transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="transactions">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__transacti__mater__628FA481">
+    <End Role="materials" Type="Self.materials" Multiplicity="1" />
+    <End Role="transactions" Type="Self.transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="materials">
+        <PropertyRef Name="material_id" />
+      </Principal>
+      <Dependent Role="transactions">
+        <PropertyRef Name="material_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__transacti__provi__619B8048">
+    <End Role="providers" Type="Self.providers" Multiplicity="1" />
+    <End Role="transactions" Type="Self.transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="providers">
+        <PropertyRef Name="provider_id" />
+      </Principal>
+      <Dependent Role="transactions">
+        <PropertyRef Name="provider_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__transacti__trans__60A75C0F">
+    <End Role="transaction_types" Type="Self.transaction_types" Multiplicity="1" />
+    <End Role="transactions" Type="Self.transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="transaction_types">
+        <PropertyRef Name="transaction_type_id" />
+      </Principal>
+      <Dependent Role="transactions">
+        <PropertyRef Name="transaction_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_order_positions_order_id">
+    <End Role="orders" Type="Self.orders" Multiplicity="1" />
+    <End Role="order_positions" Type="Self.order_positions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="orders">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="order_positions">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orders_customer_type_id">
+    <End Role="customer_types" Type="Self.customer_types" Multiplicity="1" />
+    <End Role="orders" Type="Self.orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer_types">
+        <PropertyRef Name="customer_type_id" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="customer_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orders_order_antipod_id">
+    <End Role="orders" Type="Self.orders" Multiplicity="0..1" />
+    <End Role="orders1" Type="Self.orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="orders">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="orders1">
+        <PropertyRef Name="order_antipod_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="change_inventory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employee_id" Type="int" Mode="In" />
+    <Parameter Name="withdraw_type_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="create_client_order" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employee_id" Type="int" Mode="In" />
+    <Parameter Name="num" Type="int" Mode="In" />
+    <Parameter Name="customer_type_name" Type="nvarchar" Mode="In" />
+    <Parameter Name="is_card_payment" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="create_order" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employee_id" Type="int" Mode="In" />
+    <Parameter Name="num" Type="int" Mode="In" />
+    <Parameter Name="provider_name" Type="nvarchar" Mode="In" />
+    <Parameter Name="transaction_type_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="get_current_day_client_orders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employee_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="get_current_inventory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employee_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="get_employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="login" Type="nvarchar" Mode="In" />
+    <Parameter Name="password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="get_maxdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime" />
+  <Function Name="get_provider_orders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employee_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="get_sales_point_workers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employee_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="is_client_order_exists" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="client_order_id" Type="int" Mode="In" />
+    <Parameter Name="is_exists" Type="bit" Mode="InOut" />
+  </Function>
+  <Function Name="is_tran_order_exists" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tran_order_id" Type="int" Mode="In" />
+    <Parameter Name="is_exists" Type="bit" Mode="InOut" />
+  </Function>
+  <Function Name="report_get_revenue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employee_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="report_get_sold_goods" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employee_id" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="CoffeeShopDBModelStoreContainer">
+    <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer_types" EntityType="Self.customer_types" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="goods" EntityType="Self.goods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="material_good_links" EntityType="Self.material_good_links" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="materials" EntityType="Self.materials" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="order_positions" EntityType="Self.order_positions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="providers" EntityType="Self.providers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sales_points" EntityType="Self.sales_points" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="transaction_types" EntityType="Self.transaction_types" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="transactions" EntityType="Self.transactions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="units" EntityType="Self.units" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__accounts__employ__5CD6CB2B" Association="Self.FK__accounts__employ__5CD6CB2B">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="accounts" EntitySet="accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__employees__sales__2B3F6F97" Association="Self.FK__employees__sales__2B3F6F97">
+      <End Role="sales_points" EntitySet="sales_points" />
+      <End Role="employees" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__material___good___3B75D760" Association="Self.FK__material___good___3B75D760">
+      <End Role="goods" EntitySet="goods" />
+      <End Role="material_good_links" EntitySet="material_good_links" />
+    </AssociationSet>
+    <AssociationSet Name="FK__material___mater__3C69FB99" Association="Self.FK__material___mater__3C69FB99">
+      <End Role="materials" EntitySet="materials" />
+      <End Role="material_good_links" EntitySet="material_good_links" />
+    </AssociationSet>
+    <AssociationSet Name="FK__materials__unit___38996AB5" Association="Self.FK__materials__unit___38996AB5">
+      <End Role="units" EntitySet="units" />
+      <End Role="materials" EntitySet="materials" />
+    </AssociationSet>
+    <AssociationSet Name="FK__order_pos__emplo__30F848ED" Association="Self.FK__order_pos__emplo__30F848ED">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="order_positions" EntitySet="order_positions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__order_pos__good___31EC6D26" Association="Self.FK__order_pos__good___31EC6D26">
+      <End Role="goods" EntitySet="goods" />
+      <End Role="order_positions" EntitySet="order_positions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__transacti__emplo__6383C8BA" Association="Self.FK__transacti__emplo__6383C8BA">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="transactions" EntitySet="transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__transacti__mater__628FA481" Association="Self.FK__transacti__mater__628FA481">
+      <End Role="materials" EntitySet="materials" />
+      <End Role="transactions" EntitySet="transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__transacti__provi__619B8048" Association="Self.FK__transacti__provi__619B8048">
+      <End Role="providers" EntitySet="providers" />
+      <End Role="transactions" EntitySet="transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__transacti__trans__60A75C0F" Association="Self.FK__transacti__trans__60A75C0F">
+      <End Role="transaction_types" EntitySet="transaction_types" />
+      <End Role="transactions" EntitySet="transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_order_positions_order_id" Association="Self.FK_order_positions_order_id">
+      <End Role="orders" EntitySet="orders" />
+      <End Role="order_positions" EntitySet="order_positions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orders_customer_type_id" Association="Self.FK_orders_customer_type_id">
+      <End Role="customer_types" EntitySet="customer_types" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orders_order_antipod_id" Association="Self.FK_orders_order_antipod_id">
+      <End Role="orders" EntitySet="orders" />
+      <End Role="orders1" EntitySet="orders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

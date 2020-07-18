@@ -1,0 +1,27 @@
+﻿@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@helper HtmlOrderTable(WebViewPage page, IEnumerable<System.Web.Mvc.SelectListItem> items)
+{
+    <table id="order-table" border="1" class="table table-bordered table-responsive-md table-striped text-center">
+        <thead>
+            <tr>
+                <td><b>Продукт</b></td>
+                <td><b>Количество</b></td>
+                <td><b></b></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @page.Html.DropDownList("order_line", items, new { @class = "form-control col-md-3" })
+                </td>
+                <td>
+                    <input value="1" type="number" min="1" class="form-control col-md-3" />
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Убрать</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

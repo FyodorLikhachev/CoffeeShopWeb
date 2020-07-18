@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="01a20b6c409745ea90877cc1528f7e38" Name="Diagram1">
+        <EntityTypeShape EntityType="CoffeeShopDBModel.account" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeShopDBModel.customer_types" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeShopDBModel.employee" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeShopDBModel.good" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeShopDBModel.material_good_links" Width="1.5" PointX="8.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeShopDBModel.material" Width="1.5" PointX="6" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeShopDBModel.order_positions" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeShopDBModel.order" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeShopDBModel.provider" Width="1.5" PointX="6" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeShopDBModel.sales_points" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeShopDBModel.transaction_types" Width="1.5" PointX="6" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeShopDBModel.transaction" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeShopDBModel.unit" Width="1.5" PointX="3.75" PointY="16.5" IsExpanded="true" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK__accounts__employ__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK_orders_customer_type_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK__employees__sales__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK__order_pos__emplo__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK__transacti__emplo__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK__material___good___3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK__order_pos__good___31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK__material___mater__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK__materials__unit___38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK__transacti__mater__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK_order_positions_order_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK_orders_order_antipod_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK__transacti__provi__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeShopDBModel.FK__transacti__trans__60A75C0F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
